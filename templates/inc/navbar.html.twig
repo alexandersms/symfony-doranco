@@ -7,13 +7,19 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Accueil</a>
+                <a class="nav-link" href="/">Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Qui sommes-nous</a>
+                <a class="nav-link" href="{{ path('liste_produit') }}">Liste des produits</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Nos services</a>
+                <a class="nav-link" href="#">Detail produit</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('api_meteo') }}">Meteo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('download') }}">Télécharger pdf</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>
