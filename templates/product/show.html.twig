@@ -2,6 +2,14 @@
 
 {% block body %}
     <main class="container">
-        <h1>Présentation du produit {{ slug }}</h1>
+    <h1>{{ produit.name }} <small class="badge badge-success mt-3">{{ produit.price }}&euro;</small></h1>
+        <div class="row">
+                <div class="col">
+                    <img alt="Image de {{ produit.name }}" class="d-block w-1000 img-fluid" src="/img/uploads/{{ produit.imageName }}">
+                </div>    
+                <p class="card-text col">{{ produit.description }}</p>   
+        </div>
+        <a href="{{ path('liste_produit') }}" class="btn btn-outline-primary mb-3 mt-3">Retour à la liste</a>
+            
     </main>
 {% endblock %}

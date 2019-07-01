@@ -3,15 +3,31 @@
     <head>
         <meta charset="UTF-8">
         <title>
-            {% block title %}Welcome!
+            Malembe Malembe -
+            {% block title %}Bienvenue chez nous
             {% endblock %}
         </title>
         <link href="https://bootswatch.com/4/litera/bootstrap.min.css" rel="stylesheet"> {% block stylesheets %}{% endblock %}
         </head>
         <body>
             {% include "inc/navbar.html.twig" %}
-
-            {% block body %}{% endblock %}
+           
+                {% for type, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+                            <strong>{{ message }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}            
+                {% endfor %} 
+                <main class="container">
+                {% block body %}
+                
+                
+                {% endblock %}
+                </main>
 
             {% block javascripts %}
                 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

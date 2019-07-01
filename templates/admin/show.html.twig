@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Liste des utilisateurs</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Role</th>
+                {#<th>actions</th>
+                <td>
+                    <a href="{{ path('tag_creation')}}" class="btn btn-warning">Création d'nouveau un tag</a>
+                </td>#}
+            </tr>
+        </thead>
+        <tbody>
+            {% for utilisateur in utilisateur %}
+                <tr>
+                    <td>{{ utilisateur.id }}</td>
+                    <td>{{ utilisateur.email }}</td>
+                    {#<td>{{ utilisateur.roles }}</td>#}
+                   {#} <td>
+                        <a href="{{ path('update_tag', {'id': tag.id}) }}" class="btn btn-danger">Modifier</a>
+                        <a href="{{ path('delete_tag', {'id': tag.id}) }}" class="btn btn-primary">Supprimer</a>
+                    </td>#}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

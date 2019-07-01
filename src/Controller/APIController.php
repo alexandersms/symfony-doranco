@@ -44,9 +44,7 @@ class APIController extends AbstractController
      */
     public function pdf(): BinaryFileResponse
     {
-        $pdf = new File('documents/symfony-appli.pdf');   
+        $pdf = new File('documents/symfony-appli.pdf');
         return $this->file($pdf, 'xander007.pdf', ResponseHeaderBag::DISPOSITION_INLINE);
     }
-
 }
-

@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <h1>Création des tags</h1>
+    <main class="container">
+        <div class="mt-5">
+            {{ form_start(formTag) }}
+            {{ form_widget(formTag) }}
+            <button class="btn btn-success">Créer un tag</button>
+            {{ form_end(formTag) }}
+        </div>
+
+    </main>
+
+{% endblock %}

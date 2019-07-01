@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Modification des tags</h1>
+
+    <main class="container">
+        <div class="mt-5">
+            {{ form_start(updateTag) }}
+            {{ form_widget(updateTag) }}
+            <button class="btn btn-secondary">Modifier un tag</button>
+            {{ form_end(updateTag) }}
+        </div>
+
+    </main>
+{% endblock %}
