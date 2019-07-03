@@ -7,6 +7,7 @@ use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
@@ -22,11 +23,19 @@ class Produit
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 128
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     *  * @Assert\Length(
+     *      min = 25,
+     *      max = 4000
+     * )
      */
     private $description;
 
