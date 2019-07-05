@@ -4,22 +4,25 @@
     <main class="container">
     <h2 class="h1 mt-4 mb-5">Présentation des produits</h2>
         <div class="row">
-        {% for produit in produits %}
-            <div class="col-md-4">
-                <div class="card bg-light mb-3">
+            {% for produit in produits %}
+                <div class="col-md-4">
+                    <div class="card bg-light mb-3">
 
-                    <img src="/img/uploads/{{ produit.imageName }}" class="card-img-top img-fluid" alt="Image de {{ produit.name }}">
+                        <img src="/img/uploads/{{ produit.imageName }}" class="card-img-top img-fluid" alt="Image de {{ produit.name }}">
 
-                    <div class="card-body">
-                        <h4 class="card-title">{{ produit.name }}</h4>
-                        <p class="card-text">{{ produit.description | slice(0, 100) }}</p>
-                        <strong>{{ produit.price }}&euro;</strong><br>
-                        <a href="{{ path('produit', {slug : produit.slug}) }}" class="btn btn-primary mt-3">En savoir plus</a>
+                        <div class="card-body">
+                            <h4 class="card-title">{{ produit.name }}</h4>
+                            <p class="card-text">{{ produit.description | slice(0, 100) }}</p>
+                            <strong>{{ produit.price }}&euro;</strong><br>
+                            <a href="{{ path('produit', {slug : produit.slug}) }}" class="btn btn-primary mt-3">Detail</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('prod_delete', {slug : produit.slug}) }}" class="btn btn-danger mt-3">Supprimer</a>
+                            {% endif %}
+                            <a href="{{ path('prod_update', {slug : produit.slug}) }}" class="btn btn-warning mt-3">Modifier</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-        </div>
-        
+            {% endfor %}
+        </div>    
     </main>
 {% endblock %}

@@ -1,0 +1,21 @@
+# config/packages/easy_admin.yaml
+easy_admin:
+    entities:
+        Produit:
+            class: App\Entity\Produit
+            form: 
+                fields:
+                    - name
+                    - description
+                    - price
+                    - imageName
+                    - createAt
+                    - categories
+                    - user
+                    - isPublished
+        Category: 
+            class: App\Entity\Category
+        Tag:
+            class: App\Entity\Tag
+        User:
+            class: App\Entity\User

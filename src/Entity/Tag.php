@@ -77,4 +77,14 @@ class Tag
 
         return $this;
     }
+
+    /**
+     * On affiche le label du tag
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->label;
+    }
 }

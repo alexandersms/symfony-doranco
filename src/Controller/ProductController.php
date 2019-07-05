@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProductController extends AbstractController
@@ -35,10 +37,10 @@ class ProductController extends AbstractController
 
     /**
      * Undocumented function
-     * @Route("/produit/creation")
+     * @Route("/produit/gestion/creation")
      * @return Response
      */
-    public function create(Request $requestHTTP): Response
+    public function create(Request $requestHTTP, UserInterface $user, ObjectManager $manager): Response
     {
         //dump($requestHTTP->request);
 
@@ -51,7 +53,9 @@ class ProductController extends AbstractController
 
         //On verifie que le formulaire est soumie et valide
         if ($formProduit->isSubmitted() && $formProduit->isValid()) {
-            $manager = $this->getDoctrine()->getManager();
+
+            $produit->setUser($user);
+            //$manager = $this->getDoctrine()->getManager();
             $manager->persist($produit);
             $manager->flush();
 
@@ -71,13 +75,19 @@ class ProductController extends AbstractController
 
     /**
      * Affiche et traite le formulaire de modification d'un produit
-     * @Route("/produit/modification/{slug<[a-z0-9\-]+>}", methods={"GET", "POST"})
+     * @Route("/produit/gestion/modification/{slug<[a-z0-9\-]+>}", name= "prod_update", methods={"GET", "POST"})
      * @param Request $requestHTTP
      * @param Product $product
      * @return Response
      */
-    public function update(Request $requestHTTP, Produit $produit): Response
+    public function update(Request $requestHTTP, Produit $produit, ObjectManager $manager, UserInterface $user): Response
     {
+        if ($produit->getUser() !== $user) {
+            if (!$this->isGranted('ROLE_ADMIN')) {
+                throw $this->createAccessDeniedException("L'utilisateur courant n'a pas publié ce produit");
+            }
+        }
+
         // Récupération du formulaire
         $formProduit = $this->createForm(ProductType::class, $produit);
 
@@ -87,7 +97,7 @@ class ProductController extends AbstractController
         // On vérifie que le formulaire est soumis et valide
         if ($formProduit->isSubmitted() && $formProduit->isValid()) {
             // On sauvegarde le produit en BDD grâce au manager
-            $manager = $this->getDoctrine()->getManager();
+            //$manager = $this->getDoctrine()->getManager();
             $manager->flush();
 
             // Ajout d'un message flash
@@ -104,7 +114,8 @@ class ProductController extends AbstractController
 
     /**
      * Suppression d'un produit
-     * @Route("/produit/suppression/{slug<[a-z0-9\-]+>}", methods={"GET", "POST"})
+     * @Route("/produit/suppression/{slug<[a-z0-9\-]+>}", name= "prod_delete", methods={"GET", "POST"})
+     * @IsGranted("ROLE_MODERATEUR")
      * @param Product $product
      * @return Response
      */

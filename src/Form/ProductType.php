@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ProductType extends AbstractType
 {
@@ -20,20 +22,20 @@ class ProductType extends AbstractType
                 "label" => "Description"
             ])
             //->add('nbViews')
-            ->add('price', null, [
+            ->add('price', MoneyType::class, [
                 "label" => "Prix"
             ])
             //->add('createAt')
             ->add('isPublished', null, [
                 "label" => "Etat de publication"
             ])
-            ->add('imageName', null, [
-                "label" => "Image à définir"
+            ->add('imageFile', FileType::class, [
+                "label" => "Choisir une image"
             ])
             //->add('slug')
             //->add('tags')
             ->add('categories', null, [
-                "label" => "Catégories"
+                "label" => "Catégorie associée"
             ])
             ->add('submit', SubmitType::class, [
                 "label" => "Créer un produit"
